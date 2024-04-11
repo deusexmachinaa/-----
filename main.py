@@ -24,6 +24,7 @@ current_time = datetime.now().strftime("%y%m%d%H%M")
 result_file_name = f"{log_file_name}_Inspection_{current_time}.txt"
 # 결과 파일 경로 설정 (동일 디렉토리에 저장)
 result_file_path = os.path.join(os.path.dirname(log_file_path), result_file_name)
+print(f"Analyzing logs from {log_file_path}...")
 
 # 타임스탬프 추출 함수
 def parse_timestamp(line):
@@ -98,8 +99,6 @@ def analyze_logs(file_path):
 
 def main():
     analyze_logs(log_file_path)
-    print(f"Analyzing logs from {log_file_path}...")
-    # 여기에 분석 결과를 처리하는 코드...
 
 if __name__ == "__main__":
     main()
