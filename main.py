@@ -2,8 +2,19 @@ import re
 import os
 from datetime import datetime
 
-# 파일명 입력받음
-log_file_path = input("Enter the path to the log file: ")
+# 로그 파일 경로 입력받기
+def get_valid_log_file_path():
+    while True:
+        # 사용자로부터 로그 파일 경로 입력받기
+        log_file_path = input("Enter the path to the log file or file name: ")
+        
+        # 입력받은 경로가 실제로 존재하는 파일인지 검사
+        if os.path.isfile(log_file_path):
+            return log_file_path
+        else:
+            print("The file does not exist. Please check the path and try again.")
+
+log_file_path = get_valid_log_file_path()
 
 # 파일 이름과 확장자 분리
 log_file_name, _ = os.path.splitext(os.path.basename(log_file_path))
@@ -85,5 +96,12 @@ def analyze_logs(file_path):
             print("No 'Grab Flag is still now on' found in the log.")
             output_file.write("'No Grab Flag is still now on' found in the log.\n")
 
-# 분석실행
-analyze_logs(log_file_path)
+def main():
+    analyze_logs(log_file_path)
+    print(f"Analyzing logs from {log_file_path}...")
+    # 여기에 분석 결과를 처리하는 코드...
+
+if __name__ == "__main__":
+    main()
+    print(f"Analysis complete. Results saved to {result_file_path}")
+    input("Press Enter to exit...")
